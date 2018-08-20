@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SmokeSuite]" parallel="tests">
+  <test thread-count="5" name="run on device 1(failed)" parallel="tests">
+    <parameter name="port" value="4723"/>
+    <parameter name="device" value="ZY2243BVZ8"/>
+    <classes>
+      <class name="testcases.ebayTest">
+        <methods>
+          <include name="orderProduct"/>
+          <include name="Setup"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- testcases.ebayTest -->
+    </classes>
+  </test> <!-- run on device 1(failed) -->
+</suite> <!-- Failed suite [SmokeSuite] -->

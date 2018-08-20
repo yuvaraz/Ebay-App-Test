@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="SmokeSuite" verbose="1" parallel="tests" thread-count="5" preserve-order="true">
+
+  <test name="run on device 1">
+  <parameter name="device" value="ZY2243BVZ8"></parameter>
+  <parameter name="port" value="4723"></parameter>
+    <classes>
+      <class name="testcases.ebayTest"/>
+    </classes>
+    
+  </test>
+  
+</suite>
+
