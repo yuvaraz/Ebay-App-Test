@@ -18,8 +18,9 @@ public class Settings {
     public static final String defaultiOSVersion;
 
     static {
-
-        //Android properties
+        /*
+         * Android properties
+         */
         applicationPath = System.getProperty("applicationPath");
         androidEmulator = System.getProperty("androidEmulator");
         device = System.getProperty("android");
@@ -29,8 +30,9 @@ public class Settings {
         testDeviceName = System.getProperty("testDeviceName");
         testDeviceVersion = System.getProperty("testDeviceVersion");
         deviceID = System.getProperty("deviceId");
-
-        //iOS properties
+        /*
+         * iOS properties
+         */
         iOSDevice = System.getProperty("iOSDevice");
         defaultiOSDevice = System.getProperty("defaultiOSDevice");
         UDID = System.getProperty("UDID");

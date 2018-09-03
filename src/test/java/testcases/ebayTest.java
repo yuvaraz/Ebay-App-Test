@@ -10,10 +10,8 @@ import pageobjects.OrderProductPage;
 
 public class ebayTest extends BaseClass {
 	
-	
 	LoginPage loginPage = new LoginPage();
 	OrderProductPage orderPage = new OrderProductPage();
-	
 	/**
 	 * TC-0001 Verify Login Functionality
 	 * @throws Exception 
@@ -31,12 +29,10 @@ public class ebayTest extends BaseClass {
 			throw new RuntimeException(t.getLocalizedMessage());
 		}
 	}
-	
 	/**
 	 * TC-0002 Verify order product Functionality
 	 * @throws Exception
 	 */
-	
 	@Test(priority=2)
 	public void orderProduct() throws Exception {
 		try {
@@ -53,29 +49,5 @@ public class ebayTest extends BaseClass {
 			log.error(t.getLocalizedMessage());
 			throw new RuntimeException(t.getLocalizedMessage());
 		}
-		
 	} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

@@ -24,11 +24,15 @@ public class AppiumManager   {
 	public static void startAppiumServer(String port) throws Exception
 	{ 
 		try{
-			//Set Capabilities
+			/*
+			 * Set Capabilities
+			 */
 			cap = new DesiredCapabilities();
 			cap.setCapability("noReset", "false");
 			
-			//Build the Appium service
+			/*
+			 * Build the Appium service
+			 */
 			builder = new AppiumServiceBuilder();
 			builder.withIPAddress("127.0.0.1");
 			builder.usingPort(Integer.parseInt(port));
@@ -36,7 +40,9 @@ public class AppiumManager   {
 			builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
 			builder.withArgument(GeneralServerFlag.LOG_LEVEL,"error");
 			
-			//Start the server with the builder
+			/*
+			 * Start the server with the builder
+			 */
 			service = AppiumDriverLocalService.buildService(builder);
 			service.start();			
 			Thread.sleep(5000);

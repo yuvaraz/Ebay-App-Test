@@ -19,17 +19,24 @@ import io.appium.java_client.remote.MobileCapabilityType;
 
     public class BaseClass extends GenerateLogs
     {
-    	
+    	/*
+    	 * Initialising AppiumDriver
+    	 */
     	public static AppiumDriver<MobileElement> driver;
     	public static ExcelReader ereader ;
     	
-	 @BeforeClass
-     @Parameters({"port","device"})
-     public void Setup(String port,String device) throws Exception {  
+    	@BeforeClass
+    	@Parameters({"port","device"})
+	    public void Setup(String port,String device) throws Exception {  
 		 generateLogs();
 		 log.info("Configuration setup.....");
 		 ereader = new ExcelReader(System.getProperty("user.dir")+"//src//main//resources//config//ebay.xlsx");
 		 AppiumManager.startAppiumServer(port);
+		 
+		 /*
+		  * Create a DesiredCapabilities object and 
+		  * sending capabilities to Appium Server to create a new session
+		  */
     	 DesiredCapabilities capabilities = new DesiredCapabilities();
          capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
          capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
@@ -41,7 +48,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
          log.info("Application opended Successfully.....");
  
      }
-     
+     /*
+      *The Below Method will Close All the Driver instances
+      */
 	 	@AfterClass()
 		public void tearDown() throws Exception {
 			driver.quit();

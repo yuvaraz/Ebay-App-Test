@@ -18,16 +18,19 @@ package com.appium.base;
        public XSSFCell cell;
        public FileOutputStream fos;
  
-       //constructor for path setting
+       /*
+        * constructor for path setting
+        */
       public ExcelReader(String path) throws IOException{
   
 	      this.path =path;
 	      file = new FileInputStream(path);
 	       workbook= new XSSFWorkbook(file);
       }
-      
-      
-	     //Reusable method for reading data from excel
+       
+	     /*
+	      * Reusable method for reading data from excel
+	      */
 	     public  String getCellData(String sheetName,int rowNum,int colNum){
 	     int index = workbook.getSheetIndex(sheetName);
 	     sheet =workbook.getSheetAt(index);
@@ -37,7 +40,9 @@ package com.appium.base;
 	     return data; 
     }
  
-    //Reusable method for writing data to the excel
+    /*
+     * Reusable method for writing data to the excel
+     */
     public void setCellData(String sheetName,String data,int rowNum,int colNum) throws IOException{
  
 	    int index = workbook.getSheetIndex(sheetName);
@@ -45,7 +50,6 @@ package com.appium.base;
 	   row = sheet.getRow(rowNum);
 	
 	   if(row==null){
-	   
 	   row =sheet.createRow(rowNum);
 	  }
 	  cell = row.getCell(colNum);
@@ -53,7 +57,6 @@ package com.appium.base;
 	   cell= row.createCell(colNum); 
 	  }
 	    cell.setCellValue(data);
-	
 	   fos = new FileOutputStream(path);
 	   workbook.write(fos);
 	   fos.close();

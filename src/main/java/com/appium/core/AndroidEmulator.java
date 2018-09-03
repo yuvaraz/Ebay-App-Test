@@ -6,7 +6,6 @@ import java.io.IOException;
 public class AndroidEmulator {
 
     private final static Logger log = Logger.getLogger(AndroidEmulator.class);
-
     CommandPrompt cp = new CommandPrompt();
     private String launchEmulator, defaultEmulator;
     private String[] lines;
@@ -16,7 +15,10 @@ public class AndroidEmulator {
     public String getDefaultEmulator() {
         return defaultEmulator;
     }
-
+/**
+ * Below method starts AndroidEmulator 
+ * 
+ */
     public void startDefaultEmulator() throws Exception {
         String availableEmulators = cp.runCommand("emulator -list-avds");
         // check its not null so that we don't end up in NPE

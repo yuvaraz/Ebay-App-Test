@@ -20,13 +20,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-
+/**
+ * CommonMethod class contains all the 
+ * Re-usable methods which are used throughout the 
+ * automation of TestScripts
+ */
 public class CommonMethod extends BaseClass  {
 
     static WebDriverWait wait;
     
     public static WebElement findElement(String key) throws IOException {
-    	
+    	/**
+    	 * creating an object of properties class
+    	 * and getting the values from properties file through the object reference
+    	 */
     	Properties prop = new Properties();
     	FileInputStream file = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\resources\\config\\locator.properties");
     	prop.load(file);
@@ -54,11 +61,7 @@ public class CommonMethod extends BaseClass  {
     		
     		throw new RuntimeException("incorrect locator type provided");
     	}
-    	
-    	
     }
-    
-
     public static boolean isElementPresent(String key) throws IOException {
    	try {   
 			if (findElement(key).isDisplayed()){
@@ -70,7 +73,6 @@ public class CommonMethod extends BaseClass  {
 			return false;
 		}
 	}
-    
     public static void click(String key) throws IOException{
     	
     	if(isElementPresent(key)) {
@@ -80,8 +82,6 @@ public class CommonMethod extends BaseClass  {
     		log.error("Error found in while clicking on button ");
     	}
     }
-   
-  
     public static void sendKeys(String key,String data) throws IOException{
     	if(isElementPresent(key)) {
         	((MobileElement) findElement(key)).setValue(data);
@@ -89,15 +89,14 @@ public class CommonMethod extends BaseClass  {
     	}else {
     		log.error("Error found while passing data to input  field ");
     	}
-    	
     }
-    
     public String getText(By locator){
        return driver.findElement(locator).getText();	
     }
-     
     public int getSizeElements(By locator){
-    	//waitForVisibilityOf(locator);
+    	/*
+    	 * waitForVisibilityOf(locator);
+    	 */
     	List<MobileElement> elements = driver.findElements(locator);
     	return elements.size();
     }
@@ -112,7 +111,6 @@ public class CommonMethod extends BaseClass  {
         swipeObject.put("duration", 3.0);
         js.executeScript("mobile: swipe", swipeObject);
     }
-
 
     public void swipeLeftToRight() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -155,7 +153,6 @@ public class CommonMethod extends BaseClass  {
         tapObject.put("element", Double.valueOf(((RemoteWebElement) elementToTap).getId()));
         js.executeScript("mobile: tap", tapObject);
     }
-
  
     //Generic Methods
     public static WebElement scrollToText(String resourceID , String text){

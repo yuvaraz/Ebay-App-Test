@@ -6,10 +6,8 @@ import java.util.Map;
 
 public class DeviceConfiguration extends BaseClass {
 
-
     CommandPrompt cmd = new CommandPrompt();
     Map<String, String> devices = new HashMap<String, String>();
-
     /**
      * This method start adb server
      */
@@ -25,7 +23,6 @@ public class DeviceConfiguration extends BaseClass {
             System.exit(0);
         }
     }
-
     /**
      * This method stop adb server
      */
@@ -40,11 +37,9 @@ public class DeviceConfiguration extends BaseClass {
      */
     public Map<String, String> getDevices() throws Exception {
 
-        log.info("Device Conf - getDevices");
-
+    	log.info("Device Conf - getDevices");
         String output = cmd.runCommand("adb devices");
         String[] lines = output.split("\n");
-
         if (lines.length <= 1) {
             //log.info("No Device Connected");
             stopADB();
@@ -53,7 +48,6 @@ public class DeviceConfiguration extends BaseClass {
             throw new RuntimeException("No device connected for execution");
 
         }
-
         for (int i = 1; i < lines.length; i++) {
             lines[i] = lines[i].replaceAll("\\s+", "");
 
@@ -71,23 +65,19 @@ public class DeviceConfiguration extends BaseClass {
                 String osVersion = cmd.runCommand("adb -s " + deviceID + " shell getprop ro.build.version.release")
                         .replaceAll("\\s+", "");
                 String deviceName = brand + " " + model;
-
                 devices.put("deviceID" + i, deviceID);
                 devices.put("deviceName" + i, deviceName);
                 devices.put("osVersion" + i, osVersion);
-
                 log.info("Following device is connected");
                 log.info(deviceID + " " + deviceName + " " + osVersion + "\n");
             } else if (lines[i].contains("unauthorized")) {
                 lines[i] = lines[i].replaceAll("unauthorized", "");
                 String deviceID = lines[i];
-
                 log.info("Following device is unauthorized");
                 log.info(deviceID + "\n");
             } else if (lines[i].contains("offline")) {
                 lines[i] = lines[i].replaceAll("offline", "");
                 String deviceID = lines[i];
-
                 log.info("Following device is offline");
                 log.info(deviceID + "\n");
             }
@@ -99,18 +89,13 @@ public class DeviceConfiguration extends BaseClass {
 
         String output = cmd.runCommand("adb devices");
         String[] lines = output.split("\n");
-
         for (int i = 1; i < lines.length; i++) {
             lines[i] = lines[i].replaceAll("\\s+", "");
-
             if (lines[i].contains("emulator")) {
-
                 if (lines[i].contains("offline")) {
                     lines[i] = lines[i].replaceAll("offline", "");
-
                     waitForEmulatorToGoToDeviceState();
                 }
-
                 else if (lines[i].contains("device")) {
                     lines[i] = lines[i].replaceAll("device", "");
                     String deviceID = lines[i];
@@ -121,11 +106,9 @@ public class DeviceConfiguration extends BaseClass {
                     String osVersion = cmd.runCommand("adb -s " + deviceID + " shell getprop ro.build.version.release")
                             .replaceAll("\\s+", "");
                     String deviceName = brand + " " + model;
-
                     devices.put("deviceID" + i, deviceID);
                     devices.put("deviceName" + i, deviceName);
                     devices.put("osVersion" + i, osVersion);
-
                     log.info("Following device is connected");
                     log.info(deviceID + " " + deviceName + " " + osVersion + "\n");
                 }
@@ -133,14 +116,11 @@ public class DeviceConfiguration extends BaseClass {
         }
         return devices;
     }
-
     public Map<String, String> getiOSdevice() throws Exception{
 
         String Output1 = cmd.runCommand("instruments -s devices");
         String[] lines = Output1.split("\n");
-
         int n = 1;
-
         for ( int i = 2; i < lines.length; i++ ) {
             if ((lines[i].contains("Apple")) || (lines[i].contains("(Simulator)"))) {
                 StringBuffer sBuffer = new StringBuffer(lines[i]);
@@ -151,14 +131,11 @@ public class DeviceConfiguration extends BaseClass {
                 String UDID = Len.split(" ")[Leng.length-1].replace("[", "").replace("]","").trim();
                 String iOSVersion = Len.split(" ")[Leng.length-2].replace("(", "").replace(")","").trim();
                 String deviceName = Len.replace(UDID, "").replace(iOSVersion, "").replace("[", "").replace("]","").replace("(", "").replace(")","").trim();
-
                 devices.put("UDID"+n, UDID);
                 devices.put("iOSVersion"+n, iOSVersion);
                 devices.put("deviceName"+n, deviceName);
-
                 log.info("Device information is : ");
                 log.info(deviceName + " " + iOSVersion + " " + UDID + "\n");
-
                 n = n + 1;
             }
         }
