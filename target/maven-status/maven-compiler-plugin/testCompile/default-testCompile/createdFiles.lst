@@ -1,4 +1,0 @@
-pageobjects\LoginPage.class
-pageobjects\OrderProductPage.class
-testcases\ChromeTest.class
-testcases\ebayTest.class
